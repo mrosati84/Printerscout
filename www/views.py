@@ -12,9 +12,10 @@ def export(request):
     writer = csv.writer(response)
     printers = Printer.objects.all()
 
-    writer.writerow(['Etichetta', 'Area', 'Modello', 'Azienda', 'Piano', 'Referente', 'Immagine', 'Data prima visita', 'Contatore nero (prima visita)', 'Contatore colore (prima visita)', 'Data seconda visita', 'Contatore nero (seconda visita)', 'Contatore colore (seconda visita)'])
+    # writer.writerow(['Etichetta', 'Area', 'Marca', 'Modello', 'Azienda', 'Piano', 'Referente', 'Immagine', 'Data prima visita', 'Contatore nero (prima visita)', 'Contatore colore (prima visita)', 'Data seconda visita', 'Contatore nero (seconda visita)', 'Contatore colore (seconda visita)'])
+    writer.writerow(['Etichetta', 'AZIENDA', 'AREA', 'PIANO', 'UFFICIO', 'UTENTI e NOTE', 'MARCA', 'MODELLO', 'DATA PRIMO RIL', 'COPIE BN', 'COPIE COLOR', 'DATA SECONDO RIL', 'COPIE BN', 'COPIE COLOR', 'IMMAGINE'])
 
     for p in printers:
-        writer.writerow([p.label, p.area, p.model, p.company.name, p.floor, p.referer, p.image, p.first_visit, p.first_visit_black, p.first_visit_color, p.second_visit, p.second_visit_black, p.second_visit_color])
+        writer.writerow([p.label, p.company.name, p.area, p.floor, p.office, p.referer, p.brand.name, p.model, p.first_visit, p.first_visit_black, p.first_visit_color, p.second_visit, p.second_visit_black, p.second_visit_color, p.image])
 
     return response
