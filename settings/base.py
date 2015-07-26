@@ -41,6 +41,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'printers.urls'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
 
 TEMPLATES = [
