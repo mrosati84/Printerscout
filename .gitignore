@@ -1,3 +1,5 @@
 *.pyc
 /media/*
 *.sqlite3
+/settings/production.py
+/settings/local.py

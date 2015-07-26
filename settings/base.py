@@ -6,13 +6,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 CONTENT_TYPES = ['image', 'video']
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 DEBUG = True
 
 INSTALLED_APPS = (
@@ -47,8 +40,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'printers.urls'
-
-SECRET_KEY = '%lsx2lf2u%haz5*oq4raw(^dc*4g2-(9c&(6i(eg9u(xzigml!'
 
 STATIC_URL = '/static/'
 

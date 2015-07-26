@@ -11,6 +11,8 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "printers.settings")
+env = os.environ.get('DJANGO_ENV') or 'local'
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", '.'.join(['settings', env]))
 
 application = get_wsgi_application()
