@@ -43,7 +43,24 @@
         {% if field.is_readonly %}
             <span class="readonly">{{ field|field_contents_foreign_linked|linebreaksbr }}</span>
         {% else %}
+
+        {% if field.field.name == 'image' %}
+            <div id="printer-image">
+              {{ field.field }}
+            </div>
+
+            <script>
+              $(function () {
+                // add the accept attribute to the image file field
+                var $file = $('#printer-image input[type="file"]');
+                $file.attr('accept', 'image/*;capture=camera');
+              });
+            </script>
+
+          {% else %}
             {{ field.field }}
+          {% endif %}
+
         {% endif %}
 
         {# For single field errors#}
