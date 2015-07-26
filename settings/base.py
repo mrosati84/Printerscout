@@ -45,6 +45,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
 
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'Printerscout',
+    'LIST_PER_PAGE': 500,
+    'MENU': (
+        'sites',
+        {'app': 'auth', 'label': 'Utenti e gruppi', 'icon':'icon-lock', 'models': ('user', 'group')},
+        {'app': 'www', 'models': ('www.printer', 'www.brand', 'www.company')},
+    ),
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
