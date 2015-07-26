@@ -1,40 +1,41 @@
-{% load i18n admin_static suit_tags suit_list %}
-{% suit_conf_value 'list_filters_position' as FILTERS_POS %}
-<div id="toolbar">
-  <form id="changelist-search" action="" method="get" class="form-inline">
-    <div><!-- DIV needed for valid HTML -->
-      {% if cl.search_fields %}
-        <input type="text" size="30" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" class="form-control query-search {{ cl.query|yesno:' active,' }}"/>
-        <script type="text/javascript">document.getElementById("searchbar").focus();</script>
-      {% endif %}
-
-      {% spaceless %}
-        {% block filters %}
-          {% if cl.has_filters and FILTERS_POS == 'center' %}
-            <span class="search-filters">
-            {% for spec in cl.filter_specs %}
-              {% suit_list_filter_select cl spec %}
-            {% endfor %}
-            </span>
+{% load i18n admin_static suit_list admin_list suit_tags %}
+{% if cl.search_fields or cl.has_filters %}
+  {% suit_bc_value 1.5 'pop' 1.6 '_popup' as POPUP_VAR %}
+  <div id="toolbar" class="clearfix">
+    <form id="changelist-search" action="" method="get" class="form-inline">
+      <div class="search-container">
+        {% if cl.search_fields %}
+          <input type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" placeholder="{% block search_placeholder %}{% trans 'keyword'|capfirst %}{% endblock %}"{{ cl.query|yesno:' class=active,' }}>&nbsp;
+          <script type="text/javascript">document.getElementById("searchbar").focus();</script>
+        {% endif %}
+        {% spaceless %}
+          {% if cl.has_filters %}
+            {% block filters %}
+              {% if cl.has_filters %}
+                <span class="search-filters">
+                {% for spec in cl.filter_specs %}
+                  {% suit_list_filter_select cl spec %}
+                  &nbsp;
+                {% endfor %}
+                </span>
+              {% endif %}
+            {% endblock %}
           {% endif %}
-        {% endblock %}
-      {% endspaceless %}
+        {% endspaceless %}
 
-      {% if cl.search_fields or cl.has_filters and FILTERS_POS == 'center' %}
-        <input type="submit" value="{% trans 'Search' %}" class="btn btn-primary btn-submit"/>
+        <input type="submit" value="{% trans 'Search' %}" class="btn btn-info"/>
+        &nbsp;
+        {% if show_result_count %}
+          <span class="small quiet result-count">{% blocktrans count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %}
+            &nbsp; <a href="?{% if cl.is_popup %}{{ POPUP_VAR }}=1{% endif %}">
+              {% blocktrans with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktrans %}</a></span>
+        {% endif %}
+      </div>
+
+      {% if cl.is_popup %}
+        <input type="hidden" name="{{ POPUP_VAR }}" value="1">
       {% endif %}
-      {% if show_result_count %}
-        <a href="?{% if cl.is_popup %}_popup=1{% endif %}" class="btn-reset btn btn-warning"><span class="glyphicon glyphicon-remove"></span></a>
-        <span class="result-count text-muted">{% blocktrans count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %} &nbsp;/&nbsp; {% blocktrans with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktrans %}
-        </span>
-      {% endif %}
 
-{#      Not needed for horizontal filters in Django Suit, as it handles it by itself #}
-{#      {% for pair in cl.params.items %}#}
-{#        {% ifnotequal pair.0 search_var %}#}
-{#          <input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>{% endifnotequal %}#}
-{#      {% endfor %}#}
-    </div>
-  </form>
-</div>
-
+    </form>
+  </div>
+{% endif %}

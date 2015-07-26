@@ -12,8 +12,6 @@ class PrinterAdmin(admin.ModelAdmin):
         ('Seconda visita', { 'fields': ['second_visit', 'second_visit_black', 'second_visit_color'] }),
     ]
 
-PrinterAdmin.list_per_page = 500
-
 admin.site.register(Company)
 admin.site.register(Brand)
 admin.site.register(Printer, PrinterAdmin)

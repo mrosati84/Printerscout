@@ -7,4 +7,20 @@
 
   {% if show_delete_link %}<a href="delete/" class="text-error deletelink">{% trans "Delete" %}</a>
   {% endif %}
+  {% if show_delete_translation %}
+    {% if show_delete_link %}
+    <br>
+    {% endif %}
+    <a href="delete-translation/?language={{ language }}" class="text-error deletelink delete-translation">{% blocktrans with language_name|lower as language %}Delete {{ language }} translation{% endblocktrans %}</a>
+  {% endif %}
+
 </div>
+
+<script type="text/javascript">
+(function ($) {
+	var i = 0;
+	$('form').submit(function () {
+		i++; if(i > 1) { return false; }
+	});
+})(jQuery);
+</script>

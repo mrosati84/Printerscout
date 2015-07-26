@@ -1,13 +1,14 @@
 {% if show %}
   <div class="xfull">
-    <ol class="toplinks breadcrumb breadcrumb-light">
+    <ul class="toplinks breadcrumb">
       {% if back %}
-        <li class="date-back"><a href="{{ back.link }}">&lsaquo; {{ back.title }}</a></li>{% endif %}
-      {% for choice in choices %}
-        <li> {% if choice.link %}
-          <a href="{{ choice.link }}">{% endif %}{{ choice.title }}
-          {% if choice.link %}</a>{% endif %}</li>
+        <li class="date-back">
+        <a href="{{ back.link }}">&laquo; {{ back.title }}</a>
+          <span class="divider">|</span>
+        </li>{% endif %}
+      {% for choice in choices %}{% spaceless %}
+        <li>{% if choice.link %}<a href="{{ choice.link }}">{% endif %}{{ choice.title }}{% if choice.link %}</a>&nbsp;{% if back %}&nbsp;{% endif %}{% endif %}{% endspaceless %}</li>
       {% endfor %}
-    </ol>
+    </ul>
   </div>
 {% endif %}
