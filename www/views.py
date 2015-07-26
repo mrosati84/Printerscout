@@ -17,6 +17,6 @@ def export(request):
 
     for p in printers:
         print p.label
-        writer.writerow([p.label, p.company.name, p.area, p.floor, p.office.encode('utf-8'), p.referer, p.brand.name, p.model, p.first_visit, p.first_visit_black, p.first_visit_color, p.second_visit, p.second_visit_black, p.second_visit_color, p.image])
+        writer.writerow([p.label, p.company.name, p.area, p.floor, p.office.encode('utf-8'), p.referer.encode('utf-8'), p.brand.name, p.model.encode('utf-8'), p.first_visit, p.first_visit_black, p.first_visit_color, p.second_visit, p.second_visit_black, p.second_visit_color, p.image])
 
     return response
