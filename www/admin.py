@@ -4,7 +4,13 @@ from www.models import Company, Brand, Printer
 # Register your models here.
 
 class PrinterAdmin(admin.ModelAdmin):
-    list_display = ('label', 'company', 'area', 'referer', 'office', 'brand', 'model', 'is_network_printer')
+    def has_image(self, obj):
+        if obj.image:
+            return '<span class="has-image"></span>';
+        return obj.image
+    has_image.allow_tags = True
+
+    list_display = ('label', 'company', 'area', 'referer', 'office', 'brand', 'model', 'is_network_printer', 'has_image')
     list_filter = ['company']
     fieldsets = [
         ('', { 'fields': ['label', 'company', 'area', 'floor', 'office', 'referer', 'brand', 'model', 'image', 'ip_address'] }),
