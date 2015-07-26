@@ -6,7 +6,8 @@ import csv
 from datetime import datetime
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "printers.settings")
+    env = os.environ.get('DJANGO_ENV') or local
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", '.'.join(['settings', env]))
     from www.models import Printer, Company, Brand
 
     with open('data.csv', 'rb') as csvfile:
