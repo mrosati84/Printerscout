@@ -47,11 +47,13 @@ STATIC_URL = '/static/'
 
 SUIT_CONFIG = {
     'ADMIN_NAME': 'Printerscout',
+    'HEADER_DATE_FORMAT': 'l j F Y',
+    'HEADER_TIME_FORMAT': 'H:i',
     'LIST_PER_PAGE': 500,
     'MENU': (
         'sites',
         {'app': 'auth', 'label': 'Utenti e gruppi', 'icon':'icon-lock', 'models': ('user', 'group')},
-        {'app': 'www', 'models': ('www.printer', 'www.brand', 'www.company')},
+        {'app': 'www', 'icon': 'icon-print', 'models': ('www.printer', 'www.brand', 'www.company')},
     ),
 }
 
@@ -71,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Rome'
 
 USE_I18N = True
 
